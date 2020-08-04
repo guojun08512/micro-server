@@ -1,0 +1,28 @@
+etcd:
+  addrs:
+    - 127.0.0.1:2379
+consul:
+  addrs:
+    - 192.168.201.23:8500
+redis:
+  addr: 127.0.0.1:6379
+  password:
+  poolSize: 5
+host: 192.168.201.32
+task:
+  prefix: "keyayun.service.api"
+  cars:
+    render:
+      ports:
+        - 1234
+        - 1235
+        - 1236
+        - 1237
+log:
+  level: info
+  report_caller: false
+  os_out: true
+  output:
+    filename: ./log/service.log
+#    maxsize:
+#    maxage

@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package keyayun.seal.runner.services;
+
+service Services {
+  rpc Manifest(ManifestRequest) returns (ManifestInfo) {}
+  rpc Register(TokenModel) returns (TokenResponse) {}
+  rpc Update(TokenModel) returns (TokenResponse) {}
+  rpc UnRegister(TokenModel) returns (TokenResponse) {}
+  rpc Start(StartRequest) returns (StartResponse) {}
+  rpc Stop(StopRequest) returns (StopResponse) {}
+  rpc Stream(stream StreamData) returns (stream StreamData) {}
+}
+
+message ManifestRequest {
+}
+
+message Param {
+  string name = 1;
+  string type = 2;
+  string description = 3;
+}
+
+message Trigger {
+  string type = 1;
+  string debounce = 2;
+  string trigger = 3;
+}
+
+message ManifestInfo {
+  string name = 1;
+  string description = 2;
+  string version = 3;
+  repeated string categories = 4;
+  string repository = 5;
+  repeated string scope = 6;
+  repeated Param params = 7;
+  repeated Trigger services = 8;
+}
+
+message TokenModel {
+  string client_id = 1;
+  string client_secret = 2;
+  string client_name = 3;
+  string software_id = 4;
+  string software_version = 5;
+  string refresh_token = 6;
+  string access_token = 7;
+  string token_type = 8;
+  string refresh_uri = 9;
+  string domain = 10;
+  string scheme = 11;
+}
+
+message TokenResponse {
+}
+
+message StartRequest {
+  string baseWSlink = 1;
+  string workItemID = 2;
+  string domain = 3;
+}
+
+message StartResponse {
+  repeated string streamUrls = 1;
+  repeated string stopUrls = 2;
+}
+
+message StopRequest {
+  string _sid = 1;
+}
+
+message StopResponse {
+}
+
+message StreamData {
+  string _sid = 1;
+  bytes data = 2;
+}
